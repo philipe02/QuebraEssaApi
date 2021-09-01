@@ -35,4 +35,5 @@ public class ServicoService {
 				.collect(Collectors.toList());
 		return servicosDTO;
 	}
+	
 }

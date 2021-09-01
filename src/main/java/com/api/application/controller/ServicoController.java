@@ -15,7 +15,6 @@ import com.api.application.dto.ServicoDTO;
 import com.api.application.model.Servico;
 import com.api.application.service.ServicoService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/servico")
 public class ServicoController {
