@@ -36,4 +36,16 @@ public class ServicoService {
 		return servicosDTO;
 	}
 	
+	public List<ServicoDTO> findByTitulo(String titulo){
+			
+			List<Servico> servicoLista = servicoRepo.findByTitulo(titulo);		 
+	        
+			new ServicoDTO();
+			List<ServicoDTO> servicosDTO = servicoLista.stream()
+	        .map(servico -> ServicoDTO.createServicoDTO(servico))
+	        .collect(Collectors.toList());
+			
+	        return servicosDTO;
+
+	}
 }
