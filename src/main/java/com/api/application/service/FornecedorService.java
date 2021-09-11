@@ -1,5 +1,6 @@
 package com.api.application.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,13 @@ public class FornecedorService {
 	public List<Fornecedor> save(Fornecedor fornecedor) {
 
 		return (List<Fornecedor>) apiRepository.save(fornecedor);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> detalhes(String nome){
+		
+		Object listaDetalhes = apiRepository.findByNome(nome);
+		
+		return (List<Fornecedor>) listaDetalhes;
 	}
 }

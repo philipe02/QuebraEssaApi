@@ -62,4 +62,5 @@ public class Fornecedor {
 	@ManyToOne
 	@JoinColumn(name = "servicoid")
 	Servico servico;
+
 }
