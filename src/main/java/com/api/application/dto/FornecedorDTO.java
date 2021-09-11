@@ -23,7 +23,7 @@ public class FornecedorDTO {
 	private String estado;
 	private String servico;
 
-	public static FornecedorDTO createServicoDTO(Fornecedor fornecedor) {
+	public static FornecedorDTO createFornecedorDTO(Fornecedor fornecedor) {
 		FornecedorDTO fornecedorDTO = new FornecedorDTO(fornecedor.getCpf(), fornecedor.getNome(),
 				fornecedor.getEmail(), fornecedor.getTelefone(), fornecedor.getDescricao(), fornecedor.getEndereco(),
 				fornecedor.getBairro(), fornecedor.getCidade(), fornecedor.getEstado(),

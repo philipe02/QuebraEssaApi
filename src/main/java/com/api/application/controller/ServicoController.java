@@ -37,17 +37,12 @@ public class ServicoController {
 			@RequestParam(required = false, defaultValue = "3") Integer itensPorPagina,
 			@RequestParam(required = false, defaultValue = "id") String campoOrdenacao,
 			@RequestParam(required = false, defaultValue = "ASC") String direcaoOrdenacao,
-			@RequestParam(required=false) Integer id,
-			@RequestParam(required=false) String titulo){
-		
-			Page<Servico> servicos = servicoService.buscarTodos
-					(numeroPagina,
-					itensPorPagina, 
-					campoOrdenacao,
-					direcaoOrdenacao, 
-					id, titulo);
-		
-			return new ResponseEntity<Page<Servico>>(servicos, HttpStatus.OK);
+			@RequestParam(required = false) Integer id, @RequestParam(required = false) String titulo) {
+
+		Page<Servico> servicos = servicoService.buscarTodos(numeroPagina, itensPorPagina, campoOrdenacao,
+				direcaoOrdenacao, id, titulo);
+
+		return new ResponseEntity<Page<Servico>>(servicos, HttpStatus.OK);
 	}
 
 	@GetMapping("/titulo")

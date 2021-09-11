@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +39,7 @@ public class Servico {
 	String descricao;
 
 	@OneToMany(mappedBy = "servicos", fetch = FetchType.EAGER)
+	@JsonIgnore
 	@Transient
 	private List<Fornecedor> fornecedores;
 
