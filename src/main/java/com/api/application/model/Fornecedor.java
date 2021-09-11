@@ -59,6 +59,7 @@ public class Fornecedor {
 	@JsonIgnore
 	@Transient
 	String estado;
+	@SuppressWarnings("deprecation")
 	@Column
 	@JsonIgnore
 	@Transient

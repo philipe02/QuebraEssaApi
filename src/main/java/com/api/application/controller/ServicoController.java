@@ -3,6 +3,8 @@ package com.api.application.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +32,22 @@ public class ServicoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ServicoDTO>> buscarTodosServicos() {
-		return ResponseEntity.ok(servicoService.getAll());
+	public ResponseEntity<Page<Servico>> buscarTodosServicos(
+			@RequestParam(required = false, defaultValue = "0") Integer numeroPagina,
+			@RequestParam(required = false, defaultValue = "3") Integer itensPorPagina,
+			@RequestParam(required = false, defaultValue = "id") String campoOrdenacao,
+			@RequestParam(required = false, defaultValue = "ASC") String direcaoOrdenacao,
+			@RequestParam(required=false) Integer id,
+			@RequestParam(required=false) String titulo){
+		
+			Page<Servico> servicos = servicoService.buscarTodos
+					(numeroPagina,
+					itensPorPagina, 
+					campoOrdenacao,
+					direcaoOrdenacao, 
+					id, titulo);
+		
+			return new ResponseEntity<Page<Servico>>(servicos, HttpStatus.OK);
 	}
 
 	@GetMapping("/titulo")

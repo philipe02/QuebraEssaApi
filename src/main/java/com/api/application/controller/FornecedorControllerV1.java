@@ -38,4 +38,12 @@ public class FornecedorControllerV1 {
 		return ResponseEntity.created(null).body(serviceApi.save(fornecedor));
 	}
 	
+	//endpoint para mostrar detalhes do fornecedor
+	@GetMapping("/buscarDetalhes")
+	public ResponseEntity<ArrayList<Fornecedor>> getDetailsOfFornc(
+			@RequestParam String nome){
+		
+		ArrayList<Fornecedor> listaRetorno = (ArrayList<Fornecedor>) serviceApi.detalhes(nome);
+		return new ResponseEntity<ArrayList<Fornecedor>>(listaRetorno,HttpStatus.OK);
+	}
 }
