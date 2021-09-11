@@ -59,6 +59,10 @@ public class Fornecedor {
 	@JsonIgnore
 	@Transient
 	String estado;
+	@Column
+	Double pontuacao;
+	@Column
+	Integer qtdVotos;
 	@ManyToOne
 	@JoinColumn(name = "servicoid")
 	Servico servico;

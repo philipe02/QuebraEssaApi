@@ -27,15 +27,16 @@ public class FornecedorService {
 				campoOrdem);
 
 		FornecedorSpecification specFornecedor = new FornecedorSpecification(servico, nome);
-		List<Fornecedor> teste = fornecedorRepository.findAll();
 		Page<Fornecedor> pageFornecedor = (Page<Fornecedor>) fornecedorRepository.findAll(specFornecedor, pageRequest);
-
+		
 		List<FornecedorDTO> fornecedoresDTO = pageFornecedor.stream()
 				.map(fornecedor -> FornecedorDTO.createFornecedorDTO(fornecedor)).collect(Collectors.toList());
 
-		int totalElements = (int) pageFornecedor.getTotalElements();
+		List<FornecedorDTO> listaFiltradaFornecedor = fornecedoresDTO.stream().filter(fornecedor -> fornecedor.getNota() > nota).collect(Collectors.toList());
+		
+		int totalElements = listaFiltradaFornecedor.size();
 
-		return new PageImpl<FornecedorDTO>(fornecedoresDTO, pageRequest, totalElements);
+		return new PageImpl<FornecedorDTO>(listaFiltradaFornecedor, pageRequest, totalElements);
 	}
 
 	@SuppressWarnings("unchecked")
