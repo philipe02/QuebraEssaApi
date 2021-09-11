@@ -14,14 +14,15 @@ public class FornecedorService {
 	@Autowired
 	FornecedorRepository apiRepository;
 
-	public List<Fornecedor> findAll(Integer id) {
-		
-		return apiRepository.findAll(); 
+	public List<Fornecedor> findAll(String servico, String nome, Float nota, Integer distancia, Integer itensPagina,
+			Integer numeroPagina, String direcaoOrdenacao, String campoOrdem) {
+
+		return apiRepository.findAll();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Fornecedor> save(Fornecedor fornecedor) {
-		
+
 		return (List<Fornecedor>) apiRepository.save(fornecedor);
 	}
 }

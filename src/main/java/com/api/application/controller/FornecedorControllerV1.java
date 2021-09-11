@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,27 +16,32 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.application.model.Fornecedor;
 import com.api.application.service.FornecedorService;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/fornecedores")
 public class FornecedorControllerV1 {
 
 	@Autowired
-	FornecedorService serviceApi;
-	
-	@GetMapping("/buscarTodos")
-	public ResponseEntity<ArrayList<Fornecedor>> findAll(
-			@RequestParam Integer id){
-		
-		ArrayList<Fornecedor> listaRetorno = (ArrayList<Fornecedor>) serviceApi.findAll(id);
-		return new ResponseEntity<ArrayList<Fornecedor>>(listaRetorno,HttpStatus.OK);
+	FornecedorService fornecedorService;
+
+	@GetMapping
+	public ResponseEntity<ArrayList<Fornecedor>> findAll(@RequestParam(required = false) String servico,
+			@RequestParam(required = false) String nome, @RequestParam(required = false) Float nota,
+			@RequestParam(required = false) Integer distancia,
+			@RequestParam(required = false, defaultValue = "5") Integer itensPagina,
+			@RequestParam(required = false, defaultValue = "1") Integer numeroPagina,
+			@RequestParam(required = false, defaultValue = "ASC") String direcaoOrdenacao,
+			@RequestParam(required = false, defaultValue = "nome") String campoOrdem) {
+
+		ArrayList<Fornecedor> listaRetorno = (ArrayList<Fornecedor>) fornecedorService.findAll(servico, nome, nota,
+				distancia, itensPagina, numeroPagina, direcaoOrdenacao, campoOrdem);
+		return new ResponseEntity<ArrayList<Fornecedor>>(listaRetorno, HttpStatus.OK);
 	}
-	
-	//método post para adicionar fornecedores no banco
+
+	// método post para adicionar fornecedores no banco
 	@PostMapping
-	public ResponseEntity<Object> adicionarNovoFornecedor(
-			@RequestBody Fornecedor fornecedor
-			){
-		return ResponseEntity.created(null).body(serviceApi.save(fornecedor));
+	public ResponseEntity<Object> adicionarNovoFornecedor(@RequestBody Fornecedor fornecedor) {
+		return ResponseEntity.created(null).body(fornecedorService.save(fornecedor));
 	}
-	
+
 }

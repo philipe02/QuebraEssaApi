@@ -4,9 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity(name="fornecedor")
+@Entity(name = "fornecedor")
 public class Fornecedor {
 
 	@Id
@@ -39,7 +40,6 @@ public class Fornecedor {
 	String telefone;
 	@Column
 	@JsonIgnore
-	@Transient
 	String descricao;
 	@Column
 	String endereco;
@@ -59,9 +59,7 @@ public class Fornecedor {
 	@JsonIgnore
 	@Transient
 	String estado;
-	@Column
-	@JsonIgnore
-	@Transient
-	@ForeignKey(name = "servicoid")
-	String servicoId;
+	@ManyToOne
+	@JoinColumn(name = "servicoid")
+	Servico servico;
 }

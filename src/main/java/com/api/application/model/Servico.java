@@ -1,9 +1,14 @@
 package com.api.application.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,5 +35,9 @@ public class Servico {
 
 	@Column
 	String descricao;
+
+	@OneToMany(mappedBy = "servicos", fetch = FetchType.EAGER)
+	@Transient
+	private List<Fornecedor> fornecedores;
 
 }
