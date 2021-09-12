@@ -30,7 +30,8 @@ public class FornecedorDTO {
 		FornecedorDTO fornecedorDTO = new FornecedorDTO(fornecedor.getCpf(), fornecedor.getNome(),
 				fornecedor.getEmail(), fornecedor.getTelefone(), fornecedor.getDescricao(), fornecedor.getEndereco(),
 				fornecedor.getBairro(), fornecedor.getCidade(), fornecedor.getEstado(),
-				fornecedor.getServico().getTitulo(),fornecedor.getPontuacao(), fornecedor.getPontuacao()/fornecedor.getQtdVotos(), fornecedor.getQtdVotos());
+				fornecedor.getServico().getTitulo(), fornecedor.getPontuacao(),
+				fornecedor.getPontuacao() / fornecedor.getQtdVotos(), fornecedor.getQtdVotos());
 
 		return fornecedorDTO;
 	}

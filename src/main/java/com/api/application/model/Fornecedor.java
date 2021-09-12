@@ -1,10 +1,13 @@
 package com.api.application.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -29,42 +32,45 @@ public class Fornecedor {
 	@Column
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	Integer id;
+	private Integer id;
 	@Column
-	String cpf;
+	private String cpf;
 	@Column
-	String nome;
+	private String nome;
 	@Column
-	String email;
+	private String email;
 	@Column
-	String telefone;
-	@Column
-	@JsonIgnore
-	String descricao;
-	@Column
-	String endereco;
+	private String telefone;
 	@Column
 	@JsonIgnore
-	@Transient
-	String complemento;
+	private String descricao;
+	@Column
+	private String endereco;
 	@Column
 	@JsonIgnore
 	@Transient
-	String bairro;
+	private String complemento;
 	@Column
 	@JsonIgnore
 	@Transient
-	String cidade;
+	private String bairro;
 	@Column
 	@JsonIgnore
 	@Transient
-	String estado;
+	private String cidade;
 	@Column
-	Double pontuacao;
+	@JsonIgnore
+	@Transient
+	private String estado;
 	@Column
-	Integer qtdVotos;
+	private Double pontuacao;
+	@Column
+	private Integer qtdVotos;
+	@ManyToMany(mappedBy = "clientes")
+	@JsonIgnore
+	private List<Cliente> indicadores;
 	@ManyToOne
 	@JoinColumn(name = "servicoid")
-	Servico servico;
+	private Servico servico;
 
 }

@@ -22,48 +22,48 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="clientes")
+@Entity(name = "clientes")
 public class Cliente {
 	@Id
 	@Column
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	Integer id;
+	private Integer id;
 	@Column
-	String cpf;
+	private String cpf;
 	@Column
-	String nome;
+	private String nome;
 	@Column
-	String email;
+	private String email;
 	@Column
-	String telefone;
+	private String telefone;
 	@Column
-	String endereco;
-	@Column
-	@JsonIgnore
-	@Transient
-	String complemento;
+	private String endereco;
 	@Column
 	@JsonIgnore
 	@Transient
-	String bairro;
+	private String complemento;
 	@Column
 	@JsonIgnore
 	@Transient
-	String cidade;
+	private String bairro;
 	@Column
 	@JsonIgnore
 	@Transient
-	String estado;
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="grupo_confianca",
-	joinColumns = @JoinColumn(name = "id_confiador"),
-	inverseJoinColumns = @JoinColumn(name="id_confiado"))
+	private String cidade;
+	@Column
 	@JsonIgnore
-	List<Cliente> grupoConfianca;
+	@Transient
+	private String estado;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "indicacoes", joinColumns = @JoinColumn(name = "id_cliente"), inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
+	private List<Fornecedor> indicados;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "grupo_confianca", joinColumns = @JoinColumn(name = "id_confiador"), inverseJoinColumns = @JoinColumn(name = "id_confiado"))
+	@JsonIgnore
+	private List<Cliente> grupoConfianca;
 }
