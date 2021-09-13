@@ -38,7 +38,7 @@ public class Servico {
 	@Column
 	String descricao;
 
-	@OneToMany(mappedBy = "servicos", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "servico", fetch = FetchType.EAGER)
 	@JsonIgnore
 	@Transient
 	private List<Fornecedor> fornecedores;

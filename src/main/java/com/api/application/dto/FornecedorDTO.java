@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FornecedorDTO {
+	private Integer id;
 	private String cpf;
 	private String nome;
 	private String email;
@@ -27,7 +28,7 @@ public class FornecedorDTO {
 	private Integer qtdVotos;
 
 	public static FornecedorDTO createFornecedorDTO(Fornecedor fornecedor) {
-		FornecedorDTO fornecedorDTO = new FornecedorDTO(fornecedor.getCpf(), fornecedor.getNome(),
+		FornecedorDTO fornecedorDTO = new FornecedorDTO(fornecedor.getId(), fornecedor.getCpf(), fornecedor.getNome(),
 				fornecedor.getEmail(), fornecedor.getTelefone(), fornecedor.getDescricao(), fornecedor.getEndereco(),
 				fornecedor.getBairro(), fornecedor.getCidade(), fornecedor.getEstado(),
 				fornecedor.getServico().getTitulo(), fornecedor.getPontuacao(),

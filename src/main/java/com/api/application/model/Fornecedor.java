@@ -66,7 +66,11 @@ public class Fornecedor {
 	private Double pontuacao;
 	@Column
 	private Integer qtdVotos;
-	@ManyToMany(mappedBy = "clientes")
+	@Column
+	private String latitude;
+	@Column
+	private String longitude;
+	@ManyToMany(mappedBy = "indicados")
 	@JsonIgnore
 	private List<Cliente> indicadores;
 	@ManyToOne

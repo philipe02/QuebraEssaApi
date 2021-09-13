@@ -21,35 +21,34 @@ public class FornecedorService {
 	@Autowired
 	FornecedorRepository fornecedorRepository;
 
-	public Page<FornecedorDTO> findAll(String servico, String nome, Float nota, Integer distancia, Integer itensPagina,
+	public Page<FornecedorDTO> findAll(String servico, String nome, Double nota, Integer distancia, Integer itensPagina,
 			Integer numeroPagina, String direcaoOrdenacao, String campoOrdem) {
 		PageRequest pageRequest = PageRequest.of(numeroPagina, itensPagina, Sort.Direction.valueOf(direcaoOrdenacao),
 				campoOrdem);
 
 		FornecedorSpecification specFornecedor = new FornecedorSpecification(servico, nome);
 		Page<Fornecedor> pageFornecedor = (Page<Fornecedor>) fornecedorRepository.findAll(specFornecedor, pageRequest);
-		
+
 		List<FornecedorDTO> fornecedoresDTO = pageFornecedor.stream()
 				.map(fornecedor -> FornecedorDTO.createFornecedorDTO(fornecedor)).collect(Collectors.toList());
+		if (nota != null) {
+			fornecedoresDTO = fornecedoresDTO.stream().filter(fornecedor -> fornecedor.getNota() > nota)
+					.collect(Collectors.toList());
+		}
+		int totalElements = fornecedoresDTO.size();
 
-		List<FornecedorDTO> listaFiltradaFornecedor = fornecedoresDTO.stream().filter(fornecedor -> fornecedor.getNota() > nota).collect(Collectors.toList());
-		
-		int totalElements = listaFiltradaFornecedor.size();
-
-		return new PageImpl<FornecedorDTO>(listaFiltradaFornecedor, pageRequest, totalElements);
+		return new PageImpl<FornecedorDTO>(fornecedoresDTO, pageRequest, totalElements);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Fornecedor> save(Fornecedor fornecedor) {
+	public Fornecedor save(Fornecedor fornecedor) {
 
-		return (List<Fornecedor>) fornecedorRepository.save(fornecedor);
+		return fornecedorRepository.save(fornecedor);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Fornecedor> detalhes(String nome) {
+	public Fornecedor detalharFornecedor(Integer idFornecedor) {
 
-		Object listaDetalhes = fornecedorRepository.findByNome(nome);
+		Fornecedor fornecedor = fornecedorRepository.getById(idFornecedor);
 
-		return (List<Fornecedor>) listaDetalhes;
+		return fornecedor;
 	}
 }

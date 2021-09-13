@@ -14,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClienteDTO {
+	private Integer id;
 	private String cpf;
 	private String nome;
 	private String email;
@@ -23,11 +24,11 @@ public class ClienteDTO {
 	private String cidade;
 	private String estado;
 	private List<Cliente> grupoConfianca;
-	
+
 	public static ClienteDTO createClienteDTO(Cliente cliente) {
-		ClienteDTO clienteDTO = new ClienteDTO(cliente.getCpf(), cliente.getNome(),
-				cliente.getEmail(), cliente.getTelefone(), cliente.getEndereco(),
-				cliente.getBairro(), cliente.getCidade(),cliente.getEstado(), cliente.getGrupoConfianca());
+		ClienteDTO clienteDTO = new ClienteDTO(cliente.getId(), cliente.getCpf(), cliente.getNome(), cliente.getEmail(),
+				cliente.getTelefone(), cliente.getEndereco(), cliente.getBairro(), cliente.getCidade(),
+				cliente.getEstado(), cliente.getGrupoConfianca());
 		return clienteDTO;
 	}
 }
