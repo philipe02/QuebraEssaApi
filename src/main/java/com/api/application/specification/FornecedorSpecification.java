@@ -35,12 +35,12 @@ public class FornecedorSpecification implements Specification<Fornecedor> {
 
 		if (nome != null) {
 
-			Predicate p = criteriaBuilder.equal(root.get("nome"), nome);
+			Predicate p = criteriaBuilder.like(root.get("nome"), "%" + nome + "%");
 			predicates.add(p);
 		}
 		if (servico != null) {
 
-			Predicate p = criteriaBuilder.equal(root.join("servicoid").get("titulo"), servico);
+			Predicate p = criteriaBuilder.equal(root.join("servico").get("titulo"), servico);
 			predicates.add(p);
 		}
 		// Transforma um arrayList em um array

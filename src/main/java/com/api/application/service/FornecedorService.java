@@ -26,7 +26,7 @@ public class FornecedorService {
 		PageRequest pageRequest = PageRequest.of(numeroPagina, itensPagina, Sort.Direction.valueOf(direcaoOrdenacao),
 				campoOrdem);
 
-		FornecedorSpecification specFornecedor = new FornecedorSpecification(servico, nome);
+		FornecedorSpecification specFornecedor = new FornecedorSpecification(nome, servico);
 		Page<Fornecedor> pageFornecedor = (Page<Fornecedor>) fornecedorRepository.findAll(specFornecedor, pageRequest);
 
 		List<FornecedorDTO> fornecedoresDTO = pageFornecedor.stream()
