@@ -21,12 +21,12 @@ public class FornecedorService {
 	@Autowired
 	FornecedorRepository fornecedorRepository;
 
-	public Page<FornecedorDTO> findAll(String servico, String nome, Double nota, Integer distancia, Integer itensPagina,
+	public Page<FornecedorDTO> findAll(String servico, String nome, Double nota, String search, Integer itensPagina,
 			Integer numeroPagina, String direcaoOrdenacao, String campoOrdem) {
 		PageRequest pageRequest = PageRequest.of(numeroPagina, itensPagina, Sort.Direction.valueOf(direcaoOrdenacao),
 				campoOrdem);
 
-		FornecedorSpecification specFornecedor = new FornecedorSpecification(nome, servico);
+		FornecedorSpecification specFornecedor = new FornecedorSpecification(nome, servico, search);
 		Page<Fornecedor> pageFornecedor = (Page<Fornecedor>) fornecedorRepository.findAll(specFornecedor, pageRequest);
 
 		List<FornecedorDTO> fornecedoresDTO = pageFornecedor.stream()

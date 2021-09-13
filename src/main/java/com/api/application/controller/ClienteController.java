@@ -39,6 +39,11 @@ public class ClienteController {
 		return new ResponseEntity<Page<ClienteDTO>>(listaRetorno, HttpStatus.OK);
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<ClienteDTO> getById(@PathVariable("id") Integer id) {
+		return ResponseEntity.ok(clienteService.findById(id));
+	}
+
 	@GetMapping("/confianca/{id}")
 	public ResponseEntity<List<Cliente>> getGrupoConfianca(@PathVariable("id") Integer id) {
 		return ResponseEntity.ok(clienteService.getGrupoConfianca(id));

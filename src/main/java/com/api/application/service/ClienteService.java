@@ -42,6 +42,11 @@ public class ClienteService {
 		return new PageImpl<ClienteDTO>(clientesDTO, pageRequest, totalElements);
 	}
 
+	public ClienteDTO findById(Integer id) {
+		Cliente cliente = clienteRepo.getById(id);
+		return ClienteDTO.createClienteDTO(cliente);
+	}
+
 	public List<Cliente> getGrupoConfianca(Integer idUsuario) {
 		Cliente cliente = clienteRepo.findById(idUsuario).get();
 		// ordenando o grupo de confiança pelo nome

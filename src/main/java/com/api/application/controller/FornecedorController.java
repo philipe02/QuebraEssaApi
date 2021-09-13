@@ -28,13 +28,13 @@ public class FornecedorController {
 	@GetMapping
 	public ResponseEntity<Page<FornecedorDTO>> findAll(@RequestParam(required = false) String servico,
 			@RequestParam(required = false) String nome, @RequestParam(required = false) Double nota,
-			@RequestParam(required = false) Integer distancia,
+			@RequestParam(required = false) String search,
 			@RequestParam(required = false, defaultValue = "5") Integer itensPagina,
 			@RequestParam(required = false, defaultValue = "0") Integer numeroPagina,
 			@RequestParam(required = false, defaultValue = "ASC") String direcaoOrdenacao,
 			@RequestParam(required = false, defaultValue = "nome") String campoOrdem) {
 
-		Page<FornecedorDTO> listaRetorno = fornecedorService.findAll(servico, nome, nota, distancia, itensPagina,
+		Page<FornecedorDTO> listaRetorno = fornecedorService.findAll(servico, nome, nota, search, itensPagina,
 				numeroPagina, direcaoOrdenacao, campoOrdem);
 		return new ResponseEntity<Page<FornecedorDTO>>(listaRetorno, HttpStatus.OK);
 	}

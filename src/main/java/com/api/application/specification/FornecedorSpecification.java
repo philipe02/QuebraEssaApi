@@ -27,6 +27,7 @@ public class FornecedorSpecification implements Specification<Fornecedor> {
 
 	private String nome;
 	private String servico;
+	private String search;
 
 	@Override
 	public Predicate toPredicate(Root<Fornecedor> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
@@ -43,9 +44,20 @@ public class FornecedorSpecification implements Specification<Fornecedor> {
 			Predicate p = criteriaBuilder.equal(root.join("servico").get("titulo"), servico);
 			predicates.add(p);
 		}
+		if (search != null) {
+			Predicate nome = criteriaBuilder.like(root.get("nome"), "%" + search + "%");
+			Predicate servico = criteriaBuilder.like(root.join("servico").get("titulo"), "%" + search + "%");
+			predicates.add(nome);
+			predicates.add(servico);
+		}
 		// Transforma um arrayList em um array
 		Predicate[] arrayPredicates = predicates.toArray(new Predicate[predicates.size()]);
 
+		// Caso search exista o predicado de ser OR
+		if (search != null) {
+			Predicate pOr = criteriaBuilder.or(arrayPredicates);
+			return pOr;
+		}
 		// Cria uma restrição AND entre todos os predicados do array
 		Predicate pAnd = criteriaBuilder.and(arrayPredicates);
 
