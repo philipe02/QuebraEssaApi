@@ -34,7 +34,7 @@ public class ServicoController {
 	@GetMapping
 	public ResponseEntity<Page<Servico>> buscarTodosServicos(
 			@RequestParam(required = false, defaultValue = "0") Integer numeroPagina,
-			@RequestParam(required = false, defaultValue = "3") Integer itensPorPagina,
+			@RequestParam(required = false, defaultValue = "10") Integer itensPorPagina,
 			@RequestParam(required = false, defaultValue = "id") String campoOrdenacao,
 			@RequestParam(required = false, defaultValue = "ASC") String direcaoOrdenacao,
 			@RequestParam(required = false) Integer id, @RequestParam(required = false) String titulo) {
