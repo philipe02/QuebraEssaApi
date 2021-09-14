@@ -3,6 +3,7 @@ package com.api.application.dto;
 import java.util.List;
 
 import com.api.application.model.Cliente;
+import com.api.application.model.Fornecedor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +25,12 @@ public class ClienteDTO {
 	private String cidade;
 	private String estado;
 	private List<Cliente> grupoConfianca;
+	private List<Fornecedor> indicados;
 
 	public static ClienteDTO createClienteDTO(Cliente cliente) {
 		ClienteDTO clienteDTO = new ClienteDTO(cliente.getId(), cliente.getCpf(), cliente.getNome(), cliente.getEmail(),
 				cliente.getTelefone(), cliente.getEndereco(), cliente.getBairro(), cliente.getCidade(),
-				cliente.getEstado(), cliente.getGrupoConfianca());
+				cliente.getEstado(), cliente.getGrupoConfianca(), cliente.getIndicados());
 		return clienteDTO;
 	}
 }
