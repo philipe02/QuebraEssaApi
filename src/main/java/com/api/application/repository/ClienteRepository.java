@@ -19,8 +19,4 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	@Transactional
 	void addToConfianca(Integer idConfiador, Integer idConfiado);
 
-	@Modifying
-	@Query(value = "INSERT INTO indicacoes (id_cliente,id_fornecedor) VALUES (?1, ?2)", nativeQuery = true)
-	@Transactional
-	void indicarFornecedor(Integer idCliente, Integer idFornecedor);
 }

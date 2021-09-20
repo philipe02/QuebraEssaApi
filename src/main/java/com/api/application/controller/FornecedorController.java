@@ -19,7 +19,7 @@ import com.api.application.service.FornecedorService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/fornecedores")
+@RequestMapping("/v1/fornecedores")
 public class FornecedorController {
 
 	@Autowired

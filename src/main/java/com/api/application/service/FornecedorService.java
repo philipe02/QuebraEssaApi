@@ -40,6 +40,10 @@ public class FornecedorService {
 		return new PageImpl<FornecedorDTO>(fornecedoresDTO, pageRequest, totalElements);
 	}
 
+	// public List<Avaliacao> getAvaliacoes(Integer idFornecedor) {
+	// return fornecedorRepository.getById(idFornecedor).getAvaliacoes();
+	// }
+
 	public Fornecedor save(Fornecedor fornecedor) {
 
 		return fornecedorRepository.save(fornecedor);

@@ -1,11 +1,8 @@
 package com.api.application.service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +15,15 @@ import org.springframework.stereotype.Service;
 import com.api.application.dto.ClienteDTO;
 import com.api.application.model.Cliente;
 import com.api.application.model.Confianca;
-import com.api.application.model.Fornecedor;
-import com.api.application.model.Indicacao;
 import com.api.application.repository.ClienteRepository;
+import com.api.application.repository.FornecedorRepository;
 
 @Service
 public class ClienteService {
 	@Autowired
 	ClienteRepository clienteRepo;
+	@Autowired
+	FornecedorRepository fornecedorRepo;
 
 	public Page<ClienteDTO> findAll(Integer itensPagina, Integer numeroPagina, String direcaoOrdenacao,
 			String campoOrdem) {
@@ -60,31 +58,6 @@ public class ClienteService {
 		});
 
 		return grupoConfianca;
-	}
-
-	public String indicarFornecedor(Indicacao relacao) {
-		clienteRepo.indicarFornecedor(relacao.getIdCliente(), relacao.getIdFornecedor());
-		return "Indicado com sucesso";
-	}
-
-	public List<Fornecedor> getIndicadosPorConfianca(Integer idUsuario) {
-		List<Cliente> grupoConfianca = this.getGrupoConfianca(idUsuario);
-		List<Fornecedor> indicadosPorGrupo = new ArrayList<>();
-
-		grupoConfianca.stream().forEach(cliente -> indicadosPorGrupo.addAll(cliente.getIndicados()));
-
-		Set<Fornecedor> set = new HashSet<>(indicadosPorGrupo);
-		indicadosPorGrupo.clear();
-		indicadosPorGrupo.addAll(set);
-
-		Collections.shuffle(indicadosPorGrupo);
-
-		try {
-			return indicadosPorGrupo.subList(0, 4);
-		} catch (Exception e) {
-			return indicadosPorGrupo;
-		}
-
 	}
 
 	public String adicionarConfianca(Confianca relacao) {

@@ -18,13 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.application.dto.ClienteDTO;
 import com.api.application.model.Cliente;
 import com.api.application.model.Confianca;
-import com.api.application.model.Fornecedor;
-import com.api.application.model.Indicacao;
 import com.api.application.service.ClienteService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/cliente")
+@RequestMapping("/v1/cliente")
 public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
@@ -54,13 +52,4 @@ public class ClienteController {
 		return ResponseEntity.created(null).body(clienteService.adicionarConfianca(confianca));
 	}
 
-	@GetMapping("/indicadosPorGrupo/{id}")
-	public ResponseEntity<List<Fornecedor>> getIndicadorPorGrupoConfianca(@PathVariable("id") Integer id) {
-		return ResponseEntity.ok(clienteService.getIndicadosPorConfianca(id));
-	}
-
-	@PostMapping("/indicar")
-	public ResponseEntity<String> indicarFornecedor(@RequestBody Indicacao indicacao) {
-		return ResponseEntity.created(null).body(clienteService.indicarFornecedor(indicacao));
-	}
 }

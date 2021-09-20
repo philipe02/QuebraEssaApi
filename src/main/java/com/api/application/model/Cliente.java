@@ -11,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -59,9 +61,12 @@ public class Cliente {
 	@JsonIgnore
 	@Transient
 	private String estado;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "indicacoes", joinColumns = @JoinColumn(name = "id_cliente"), inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
-	private List<Fornecedor> indicados;
+	@OneToMany(mappedBy = "cliente")
+	@JsonIgnoreProperties("cliente")
+	private List<Avaliacao> avaliacoes;
+	@OneToMany(mappedBy = "cliente")
+	@JsonIgnoreProperties("cliente")
+	private List<Indicacao> indicados;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "grupo_confianca", joinColumns = @JoinColumn(name = "id_confiador"), inverseJoinColumns = @JoinColumn(name = "id_confiado"))
 	@JsonIgnore

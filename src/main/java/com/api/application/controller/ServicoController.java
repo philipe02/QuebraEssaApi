@@ -20,7 +20,7 @@ import com.api.application.service.ServicoService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/servico")
+@RequestMapping("/v1/servico")
 public class ServicoController {
 
 	@Autowired

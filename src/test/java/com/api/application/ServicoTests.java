@@ -1,35 +1,39 @@
 package com.api.application;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.api.application.model.Servico;
+import com.api.application.repository.ServicoRepository;
 import com.api.application.service.ServicoService;
 
 @SpringBootTest
 class ServicoTests {
 
-	@MockBean
+	@Autowired
 	ServicoService servicoService;
+
+	@MockBean
+	ServicoRepository servicoRepo;
 
 	@BeforeEach
 	void setup() {
-		/*
-		 * ServicoDTO servico1 = new ServicoDTO("Programador", null); ServicoDTO
-		 * servico2 = new ServicoDTO("Designer", null); List<ServicoDTO> listaServico =
-		 * new ArrayList<>(); listaServico.add(servico1); listaServico.add(servico2);
-		 * when(servicoService.getAll()).thenReturn(listaServico);
-		 */
+		Servico servico1 = new Servico(1, "Programador", null, null);
+		Servico servico2 = new Servico(null, "Programador", null, null);
+		when(servicoRepo.save(servico2)).thenReturn(servico1);
 	}
 
 	@Test
-	void getAll() {
-		/*
-		 * ArrayList<ServicoDTO> listaServicos = (ArrayList<ServicoDTO>)
-		 * servicoService.getAll(); assertEquals(listaServicos.get(0).getTitulo(),
-		 * "Programador");
-		 */
+	void save() throws Exception {
+		Servico servico = new Servico(null, "Programador", null, null);
+		Servico servicoSalvo = servicoService.save(servico);
+		assertEquals(servicoSalvo.getId(), 1);
 	}
 
 }

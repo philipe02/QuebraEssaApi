@@ -1,6 +1,7 @@
 package com.api.application.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity(name = "servicos")
 public class Servico {
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Servico other = (Servico) obj;
+		return Objects.equals(titulo, other.titulo);
+	}
 
 	@Id
 	@Column
